@@ -1,0 +1,35 @@
+#####
+# EditorConfig file for Dynamictivity
+#####
+
+[*]
+charset = utf-8
+
+# Std Web
+[*.{html,css,js}]
+indent_style = space
+indent_size = 2
+continuation_indent_size = 2
+
+# Scripting langs
+[*.{py,php,sh,bash,zsh},dyson]
+indent_style = space
+indent_size = 4
+continuation_indent_size = 2
+
+[*.{rb}]
+indent_style = space
+indent_size = 2
+continuation_indent_size = 2
+
+# Data formats
+[Dockerfile]
+indent_style = space
+indent_size = 2
+continuation_indent_size = 2
+
+[*.{yml,yaml,json}]
+indent_style = space
+indent_size = 2
+continuation_indent_size = 2
+

@@ -1,0 +1,2 @@
+class DysonError(BaseException):
+    pass

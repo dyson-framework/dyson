@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# Set up the dyson environment for hacking. (testing)
+#
+#  source hacking/env
+#
+# This command will place dyson on your PATH.
+#
+
+PYTHONPATH=${PYTHONPATH-""}
+PATH=${PATH-""}
+MANPATH=${MANPATH-""}
+PYTHON=$(which python 2>/dev/null || which python3 2>/dev/null)
+PYTHON_BIN=${PYTHON_BIN-$PYTHON}
+
+if [ -n "$BASH_SOURCE" ] ; then
+    HACKING_DIR=$(dirname "$BASH_SOURCE")
+elif [ $(basename -- "$0") = "env-setup" ]; then
+    HACKING_DIR=$(dirname "$0")
+else
+    HACKING_DIR="$PWD/hacking"
+fi
+
+FULL_PATH=$($PYTHON_BIN -c "import os; print(os.path.realpath('$HACKING_DIR'))")
+export DYSON_HOME="$(dirname "$FULL_PATH")"
+
+PREFIX_PYTHONPATH="$DYSON_HOME/lib"
+PREFIX_PATH="$DYSON_HOME/bin"
+PREFIX_MANPATH="$DYSON_HOME/docs/man"
+
+expr "$PYTHONPATH" : "${PREFIX_PYTHONPATH}.*" > /dev/null || export PYTHONPATH="$PREFIX_PYTHONPATH:$PYTHONPATH"
+expr "$PATH" : "${PREFIX_PATH}.*" > /dev/null || export PATH="$PREFIX_PATH:$PATH"
+expr "$MANPATH" : "${PREFIX_MANPATH}.*" > /dev/null || export MANPATH="$PREFIX_MANPATH:$MANPATH"
+
