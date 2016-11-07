@@ -1,0 +1,5 @@
+---
+
+login_page:
+  txt_username: "#username"
+  txt_password: "#password"

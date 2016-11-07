@@ -13,7 +13,7 @@ setup(
       license="Apache 2",
       package_dir={'': 'lib'},
       packages=find_packages('lib'),
-      install_requires=['PyYAML', 'jinja2'],
+      install_requires=['PyYAML', 'jinja2', 'six'],
       classifiers=[],
       scripts=[
             "bin/dyson",

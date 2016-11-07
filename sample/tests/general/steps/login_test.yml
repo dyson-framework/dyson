@@ -1,3 +1,5 @@
+---
+
 - name: log into the application
   login:
     username: test

@@ -17,6 +17,8 @@ class CLI:
 
         if datafile_opts:
             parser.add_option('-d', '--data-file', help="Specify a data file for dyson to use.")
+            parser.add_option('-e', '--extra-vars', help="Specify additional variables to override.", action="append",
+                              default=[])
 
         return parser
 

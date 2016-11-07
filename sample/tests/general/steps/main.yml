@@ -1,2 +1,4 @@
+---
+
 # login tests
 - include: login_test.yml

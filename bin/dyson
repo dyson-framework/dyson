@@ -7,22 +7,20 @@ if __name__ == "__main__":
     this = os.path.basename(sys.argv[0])
     cli = None
 
-    try:
-        if this.find('-') != -1:
-            target_cli = this.split('-')[1]
+    if this.find('-') != -1:
+        target_cli = this.split('-')[1]
 
-            theclass = "%sCLI" % target_cli.capitalize()
-            the_cli = getattr(__import__("dyson.cli.%s" % target_cli, fromlist=[theclass]), theclass)
+        theclass = "%sCLI" % target_cli.capitalize()
+        the_cli = getattr(__import__("dyson.cli.%s" % target_cli, fromlist=[theclass]), theclass)
 
-        else:
-            from dyson.cli.adhoc import AdHocCLI as the_cli
+    else:
+        from dyson.cli.adhoc import AdHocCLI as the_cli
 
-        args = [arg for arg in sys.argv]
+    args = [arg for arg in sys.argv]
 
-        cli = the_cli(args)
-        cli.parse()
-        rc = cli.run()
-        exit(rc)
+    cli = the_cli(args)
+    cli.parse()
+    rc = cli.run()
+    exit(rc)
 
-    except Exception as e:
-        print(e)
+

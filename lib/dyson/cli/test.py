@@ -3,12 +3,13 @@ import os
 from dyson.cli import CLI
 from dyson.errors import DysonError
 from dyson.utils.dataloader import DataLoader
+from dyson.vars import VariableManager, load_extra_vars
 
 
 class TestCLI(CLI):
     def parse(self):
         self.parser = CLI.base_parser(
-            "%prog tests/smoke/main.yml ...",
+            "%prog tests/smoke/steps/main.yml ...",
             datafile_opts=True
         )
         super(TestCLI, self).parse()
@@ -22,5 +23,15 @@ class TestCLI(CLI):
 
         dataloader = DataLoader()
 
+        steps = list()
+
+        variablemanager = VariableManager()
+        variablemanager.extra_vars = load_extra_vars(loader=dataloader, options=self.options)
+
+        for test in self.args:
+            steps.append(dataloader.load_file(test))
+            print(steps)
+
+        print(variablemanager.extra_vars)
 
 

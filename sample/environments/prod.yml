@@ -1,0 +1,3 @@
+# you can specify any variable that is specific to this environment
+
+base_url: {{ protocol }}://dyson-framework.com
