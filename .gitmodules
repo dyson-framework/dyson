@@ -1,3 +1,6 @@
 [submodule "lib/dyson/modules/core"]
 	path = lib/dyson/modules/core
 	url = git@github.com:dynamictivity/dyson-modules-core.git
+[submodule "lib/dyson/modules/extras"]
+	path = lib/dyson/modules/extras
+	url = git@github.com:dynamictivity/dyson-modules-extras.git
