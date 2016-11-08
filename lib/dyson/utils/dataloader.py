@@ -1,5 +1,10 @@
 import json
+
+import jinja2
 import yaml
+
+from dyson.vars import isidentifier
+from dyson.vars import parse_keyvalue
 
 
 class DataLoader:
@@ -21,13 +26,15 @@ class DataLoader:
 
         return the_data
 
-    def load_file(self, data_file):
+    def load_file(self, data_file, variable_manager=None):
         """
         Loads a JSON/YAML file
         :param data_file: the file to load
-        :param data_loader: the data_loader to load it into
+        :param variable_manager:
         :return: DataLoader
         """
+        datum = None
+
         try:
             with open(data_file, 'r') as stream:
                 the_data = json.loads(stream)
@@ -36,4 +43,38 @@ class DataLoader:
             with open(data_file, 'r') as stream:
                 the_data = yaml.load(stream)
 
-        return the_data
+        if variable_manager and the_data:
+            datum = self._iterate(the_data, variable_manager)
+
+        if datum:
+            return datum
+        else:
+            return the_data
+
+    def _iterate(self, obj, variable_manager):
+        """
+        Iterate through lists and objects and render jinja inside of them
+        :param obj: the object
+        :param variable_manager: the variable manager
+        :return:
+        """
+        new_obj = obj.copy()
+        if isinstance(new_obj, dict):
+            for item in iter(new_obj):
+                if isinstance(new_obj[item], dict):
+                    new_obj[item] = self._iterate(new_obj[item], variable_manager)
+                elif isidentifier(item):
+                    new_obj[item] = self._render_jinja(new_obj[item], variable_manager)
+        elif isinstance(new_obj, list):
+            for idx, item0 in enumerate(new_obj):
+                if isinstance(new_obj[idx], dict):
+                    new_obj[idx] = self._iterate(new_obj[idx], variable_manager)
+                elif isidentifier(item0):
+                    new_obj[idx] = self._render_jinja(new_obj[idx], variable_manager)
+        return new_obj
+
+    def _render_jinja(self, val, variable_manager):
+        t = jinja2.Template(val)
+        v = t.render(variable_manager.all)
+        p = parse_keyvalue(v)
+        return p

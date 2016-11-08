@@ -1,3 +1,0 @@
-- name: set username
-  set_text: of={{ login_page.txt_username }} to={{ args.username }}
-  set_text: of={{ login_page.txt_password }} to={{ args.password }}

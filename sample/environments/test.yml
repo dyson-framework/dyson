@@ -1,4 +1,0 @@
-# you can specify any variable that is specific to this environment
-
-base_url: {{ protocol }}://localhost:8080
-

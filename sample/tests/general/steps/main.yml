@@ -1,4 +1,14 @@
 ---
 
-# login tests
-- include: login_test.yml
+- name: navigate to application
+  goto: "url={{ base_url }}"
+
+- name: validate the title and box
+  validate:
+    title: "{{ google.title }}"
+    present: "tag=img"
+
+- validate:
+    not_present: "css=atagbro"
+
+- include: search_test.yml

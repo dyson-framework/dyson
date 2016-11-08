@@ -1,0 +1,10 @@
+---
+
+# this file contains variables for all environments. if you run -a prod.yml,
+# then the variables in prod.yml will overwrite
+
+base_url: "{{ http.protocol }}://google.com"
+
+google:
+  title: Google
+

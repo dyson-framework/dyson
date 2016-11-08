@@ -2,4 +2,4 @@
 
 - name: run all tests
   tests:
-    - { test: general, tags: [general, login] }
+    - general

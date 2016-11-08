@@ -3,11 +3,10 @@ from optparse import OptionParser
 
 
 class CLI:
-    def __init__(self, args, callback=None):
+    def __init__(self, args):
         self.args = args
         self.options = None
         self.parser = None
-        self.callback = callback
 
     @staticmethod
     def base_parser(usage="", datafile_opts=False):
@@ -16,9 +15,10 @@ class CLI:
                           help="verbose mode")
 
         if datafile_opts:
-            parser.add_option('-d', '--data-file', help="Specify a data file for dyson to use.")
             parser.add_option('-e', '--extra-vars', help="Specify additional variables to override.", action="append",
                               default=[])
+            parser.add_option('-a', '--application', help="Specify a particular application to run against.",
+                              action="store", default='default.yml')
 
         return parser
 
@@ -37,5 +37,4 @@ class CLI:
 
     @abstractmethod
     def run(self):
-        print("running")
-
+        pass

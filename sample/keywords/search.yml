@@ -1,0 +1,6 @@
+---
+- debug: "var={{ term }}"
+- set_text:
+    of: name=q
+    to: "{{ term }}"
+

@@ -1,0 +1,10 @@
+---
+
+- name: search something
+  search: term=Test
+
+- name: validate the term
+  validate:
+    value_of:
+      element: name=q
+      is: Test
