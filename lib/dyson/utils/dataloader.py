@@ -1,10 +1,10 @@
 import json
 
-import jinja2
 import yaml
+from six import string_types
 
 from dyson.vars import isidentifier
-from dyson.vars import parse_keyvalue
+from dyson.vars.parsing import parse_jinja
 
 
 class DataLoader:
@@ -63,18 +63,12 @@ class DataLoader:
             for item in iter(new_obj):
                 if isinstance(new_obj[item], dict):
                     new_obj[item] = self._iterate(new_obj[item], variable_manager)
-                elif isidentifier(item):
-                    new_obj[item] = self._render_jinja(new_obj[item], variable_manager)
+                elif isinstance(item, string_types):
+                    new_obj[item] = parse_jinja(new_obj[item], variable_manager)
         elif isinstance(new_obj, list):
             for idx, item0 in enumerate(new_obj):
                 if isinstance(new_obj[idx], dict):
                     new_obj[idx] = self._iterate(new_obj[idx], variable_manager)
                 elif isidentifier(item0):
-                    new_obj[idx] = self._render_jinja(new_obj[idx], variable_manager)
+                    new_obj[idx] = parse_jinja(new_obj[idx], variable_manager)
         return new_obj
-
-    def _render_jinja(self, val, variable_manager):
-        t = jinja2.Template(val)
-        v = t.render(variable_manager.all)
-        p = parse_keyvalue(v)
-        return p

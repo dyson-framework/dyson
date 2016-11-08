@@ -1,5 +1,7 @@
 ---
 
+- goto: "url={{ base_url }}"
+
 - name: search something
   search: term=Test
 
@@ -8,3 +10,6 @@
     value_of:
       element: name=q
       is: Test
+
+- name: click search button
+  click: name=btnK
