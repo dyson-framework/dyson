@@ -2,7 +2,7 @@
 
 # you can specify any variable that is specific to this environment
 
-base_url: "{{ http.protocol }}://google.com"
+base_url: "{{ http.protocol }}://the-internet.herokuapp.com"
 
 #google:
 #  title: Googl

@@ -1,0 +1,20 @@
+---
+
+# Test /checkboxes
+- goto: "url={{ base_url }}"
+
+- name: validate checkbox1 is unchecked
+  validate: "is_not_checked={{ page.chk_checkbox1 }}"
+- name: validate checkbox2 is checked
+  validate: "is_checked={{ page.chk_checkbox2 }}"
+
+- name: check checkbox1
+  check: "{{ page.chk_checkbox1 }}"
+- name: uncheck checkbox2
+  uncheck: "{{ page.chk_checkbox2 }}"
+
+- name: validate checkbox1 is checked
+  validate: "is_checked={{ page.chk_checkbox1 }}"
+- name: validate checkbox2 is unchecked
+  validate: "is_not_checked={{ page.chk_checkbox2 }}"
+

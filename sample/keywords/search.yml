@@ -1,7 +1,0 @@
----
-
-- debug: "var={{ search.term }}"
-
-- set_text:
-    of: name=q
-    to: "{{ search.term }}"

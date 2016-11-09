@@ -51,6 +51,22 @@ These "actions" are in the [core modules](https://github.com/dynamictivity/dyson
 
 ---
 
+### Uncheck
+
+> Unchecks **only** a checkbox
+
+- `uncheck: <selector>`
+
+> Examples:
+
+```yaml
+- uncheck: css=some > css.selector
+- uncheck:
+    id: some_id
+```
+
+---
+
 ### Set Text
 
 > Sets the value of an input

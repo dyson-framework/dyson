@@ -1,4 +1,5 @@
 import json
+from io import TextIOWrapper
 
 import yaml
 from six import string_types
@@ -44,14 +45,17 @@ class DataLoader:
                 the_data = yaml.load(stream)
 
         if variable_manager and the_data:
-            datum = self._iterate(the_data, variable_manager)
+            if isinstance(the_data, dict):
+                datum = self._iterate(the_data, variable_manager, parse_kv=False)
+            else:
+                datum = self._iterate(the_data, variable_manager)
 
         if datum:
             return datum
         else:
             return the_data
 
-    def _iterate(self, obj, variable_manager):
+    def _iterate(self, obj, variable_manager, parse_kv=True):
         """
         Iterate through lists and objects and render jinja inside of them
         :param obj: the object
@@ -62,13 +66,13 @@ class DataLoader:
         if isinstance(new_obj, dict):
             for item in iter(new_obj):
                 if isinstance(new_obj[item], dict):
-                    new_obj[item] = self._iterate(new_obj[item], variable_manager)
+                    new_obj[item] = self._iterate(new_obj[item], variable_manager, parse_kv=parse_kv)
                 elif isinstance(item, string_types):
-                    new_obj[item] = parse_jinja(new_obj[item], variable_manager)
+                    new_obj[item] = parse_jinja(new_obj[item], variable_manager, parse_kv=parse_kv)
         elif isinstance(new_obj, list):
             for idx, item0 in enumerate(new_obj):
                 if isinstance(new_obj[idx], dict):
-                    new_obj[idx] = self._iterate(new_obj[idx], variable_manager)
+                    new_obj[idx] = self._iterate(new_obj[idx], variable_manager, parse_kv=parse_kv)
                 elif isidentifier(item0):
-                    new_obj[idx] = parse_jinja(new_obj[idx], variable_manager)
+                    new_obj[idx] = parse_jinja(new_obj[idx], variable_manager, parse_kv=parse_kv)
         return new_obj

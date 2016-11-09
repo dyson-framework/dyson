@@ -1,5 +1,7 @@
 ---
 
+# This is a suite file.  In here, we include a series of tests.
+
 - name: run all tests
   tests:
-    - general
+    - checkboxes

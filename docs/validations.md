@@ -20,6 +20,10 @@ The validation module has many variations of validations it can perform.
         - `element`
             - `is`
             - `is_not`
+    - `is_checked`
+        - `element`
+    - `is_not_checked`
+        - `element`
 
 ### Examples:
 
@@ -102,4 +106,28 @@ The validation module has many variations of validations it can perform.
       id: the_id
 ```
 
+---
 
+#### Validating a checkbox status
+
+*Validate that a checkbox or radio button is checked*
+
+```yaml
+- validate: is_checked=css=input[type='checkbox']
+- validate: is_checked=id=thecheckbox
+- validate:
+    is_checked:
+        tag: input
+```
+
+*Validate that a checkbox or radio button is unchecked*
+
+```yaml
+- validate: is_not_checked=css=input[type='checkbox']
+- validate: is_not_checked=id=thecheckbox
+- validate:
+    is_not_checked:
+        tag: input
+```
+
+---
