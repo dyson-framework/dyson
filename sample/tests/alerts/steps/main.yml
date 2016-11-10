@@ -1,0 +1,6 @@
+---
+
+- goto: "url={{ url }}"
+
+- switch_to:
+    alert: username=admin password=admin
