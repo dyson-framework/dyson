@@ -3,5 +3,6 @@
 # this file contains variables for all environments. if you run -a prod.yml,
 # then the variables in prod.yml will overwrite
 
+# note, instead of base_url, you can name it anything and call that url in your scripts like `- goto: {{ my_url }}`
 base_url: "{{ http.protocol }}://the-internet.herokuapp.com"
 

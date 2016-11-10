@@ -1,8 +1,0 @@
-#!/usr/bin/env python3
-
-from dyson.utils.module import DysonModule
-
-
-class MyModule(DysonModule):
-    def run(self, selenium, **params):
-        print("running my custom module")

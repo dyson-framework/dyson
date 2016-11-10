@@ -1,8 +1,7 @@
 ---
 
-# you can specify any variable that is specific to this environment
+# you can specify any variable that is specific to this environment (note that default.yml
+# will still be loaded so you can maintain generic variables to maintain commonality between environments)
 
+# note, instead of base_url, you can name it anything and call that url in your scripts like `- goto: {{ my_url }}`
 base_url: "{{ http.protocol }}://the-internet.herokuapp.com"
-
-#google:
-#  title: Googl

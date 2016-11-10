@@ -1,0 +1,27 @@
+---
+
+iframe_page:
+  url: "{{ base_url }}/iframe"
+  frame: id=mce_0_ifr
+  tinymce: css=body#tinymce
+
+nested_frames_page:
+  url: "{{ base_url }}/nested_frames"
+
+  top_frame: name=frame-top
+
+  left_frame:
+    selector: name=frame-left
+    text: css=body
+
+  middle_frame:
+    selector: name=frame-middle
+    text: css=body
+
+  right_frame:
+    selector: name=frame-right
+    text: css=body
+
+  bottom_frame:
+    selector: name=frame-bottom
+    text: css=body

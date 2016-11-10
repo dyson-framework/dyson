@@ -1,0 +1,4 @@
+---
+
+- switch_to: default_content  # ensure we're at top before switching
+- switch_to: "frame={{ nested_frames_page.top_frame }}"

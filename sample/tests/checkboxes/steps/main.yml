@@ -1,7 +1,7 @@
 ---
 
 # Test /checkboxes
-- goto: "url={{ base_url }}"
+- goto: "url={{ page.url }}"
 
 - name: validate checkbox1 is unchecked
   validate: "is_not_checked={{ page.chk_checkbox1 }}"

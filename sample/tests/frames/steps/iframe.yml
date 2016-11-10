@@ -1,0 +1,14 @@
+---
+
+- goto: "url={{ iframe_page.url }}"
+
+- name: switch_to frame
+  switch_to: "frame={{ iframe_page.frame }}"
+
+- validate:
+    text_of:
+      element: "{{ iframe_page.tinymce }}"
+      is: Your content goes here.
+
+- name: switch back to default content
+  switch_to: default_content

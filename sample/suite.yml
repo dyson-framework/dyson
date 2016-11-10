@@ -5,3 +5,4 @@
 - name: run all tests
   tests:
     - checkboxes
+    - frames
