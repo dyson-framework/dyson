@@ -22,6 +22,7 @@ Dyson is a code-less Selenium framework powered by yaml/json
 - [Variables](https://github.com/Dynamictivity/dyson/blob/master/docs/variables.md#variables)
 - [Waiting](https://github.com/Dynamictivity/dyson/blob/master/docs/waiting.md#waiting)
 - [Modules](https://github.com/Dynamictivity/dyson/blob/master/docs/modules.md#modules)
+- [Keywords](https://github.com/dynamictivity/dyson/blob/master/docs/keywords.md#keywords)
 - [Applications](https://github.com/Dynamictivity/dyson/blob/master/docs/applications.md#applications)
 - [Configuration](https://github.com/Dynamictivity/dyson/blob/master/docs/configuration.md#dyson-configuration)
 - [Alerts](https://github.com/Dynamictivity/dyson/blob/master/docs/alerts.md#alerts)
