@@ -1,5 +1,5 @@
-Dyson Validations
-=================
+Validations
+===========
 
 There are many validations bundled in the [core modules](https://github.com/dynamictivity/dyson-modules-core)
 which will perform validations.
