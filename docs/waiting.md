@@ -10,10 +10,25 @@ element: id=test
 title: Title
 ```
 
-**Note**: 
+**Note**:
 
 > Each `wait_for` also allows a customizable timeout. Each `wait_for` defaults to what is set in `dyson.cfg`.
   You can specify a `timeout` key for each. The timeout is in seconds.
+
+- [Element to be present](#waiting-for-an-element-to-be-present)
+- [Element to be visible](#waiting-for-an-element-to-be-visible)
+- [Element to be invisible](#waiting-for-an-element-to-be-invisible)
+- [Title to be](#waiting-for-title-to-be)
+- [Title to contain](#waiting-for-title-to-contain)
+- [Alert to be present](#waiting-for-alert-to-be-present)
+- [Text to be present in element](#waiting-for-text-to-be-present-in-element)
+- [Value to be](#waiting-for-value-to-be)
+- [Element to be clickable](#waiting-for-an-element-to-be-clickable)
+- [Staleness of an element](#waiting-for-the-staleness-of-an-element)
+- [All elements to appear](#waiting-for-all-elements)
+- [Element to be selected](#waiting-for-element-to-be-selected)
+- [Element selection state to be](#waiting-for-element-selection-state-to-be)
+- [Frame to be available and switch to it](#waiting-for-a-frame-to-be-available-and-switch-to-it)
 
 ---
 
