@@ -20,7 +20,7 @@ from dyson.utils.module import DysonModule
 
 class MyModuleModule(DysonModule):
     def run(self, webdriver, params):
-        print("We're inside my module, and I passed \"%s\" % params))
+        print("We're inside my module, and I passed \"%s\"" % params))
 ```
 
 Inside of one of your test steps, you may now call your module.
