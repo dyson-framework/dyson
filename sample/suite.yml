@@ -6,4 +6,5 @@
   tests:
 #    - checkboxes
 #    - frames
-    - alerts
+#    - alerts
+    - waits

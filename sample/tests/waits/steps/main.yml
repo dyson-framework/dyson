@@ -1,0 +1,21 @@
+---
+
+# first page
+- goto: "url={{ first.url }}"
+
+- validate: "present={{ first.btn_start }}"
+- click: "{{ first.btn_start }}"
+
+- wait_for:
+    visibility_of: "element={{ first.hello }}"
+
+# second page
+- goto: "url={{ second.url }}"
+
+- validate: "present={{ second.btn_start }}"
+- click: "{{ second.btn_start }}"
+
+- wait_for:
+    visibility_of: "element={{ second.hello }}"
+
+

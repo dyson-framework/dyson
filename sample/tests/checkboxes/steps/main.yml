@@ -17,4 +17,3 @@
   validate: "is_checked={{ page.chk_checkbox1 }}"
 - name: validate checkbox2 is unchecked
   validate: "is_not_checked={{ page.chk_checkbox2 }}"
-
