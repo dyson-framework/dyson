@@ -84,7 +84,6 @@ class Test:
             else:
                 return all_steps
 
-
     def _resolve_base_path(self):
         """
         Resolve the base path of this specific test file.
@@ -138,6 +137,7 @@ class Test:
                     command_executor=command_executor,
                     desired_capabilities=getattr(DesiredCapabilities, browser.upper())
                 )
+                self._webdriver.implicit_wait(constants.DEFAULT_SELENIUM_IMPLICIT_WAIT)
             else:
                 self._webdriver = getattr(self._webdriver, browser)()
         else:

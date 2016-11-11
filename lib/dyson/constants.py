@@ -116,10 +116,12 @@ DEFAULT_HTTP_PROTOCOL = get_config(p, HTTP, 'protocol', 'DYSON_HTTP_PROTOCOL', '
 DEFAULT_HTTP_USER_AGENT = get_config(p, HTTP, 'user_agent', 'DYSON_HTTP_USER_AGENT', None, value_type='string')
 
 # selenium settings
-DEFAULT_SELENIUM_HUB = get_config(p, SELENIUM, 'hub', 'DYSON_SELENIUM_HUB', 'http://localhost:4444/wd/hub',
+DEFAULT_SELENIUM_HUB = get_config(p, SELENIUM, 'hub', 'DYSON_SELENIUM_HUB', 'http://127.0.0.1:4444/wd/hub',
                                   value_type='string')
 DEFAULT_SELENIUM_BROWSER = get_config(p, SELENIUM, 'browser', 'DYSON_SELENIUM_BROWSER', None, value_type='string')
 DEFAULT_SELENIUM_PERSIST = get_config(p, SELENIUM, 'persist', 'DYSON_SELENIUM_PERSIST', True, value_type='boolean')
+DEFAULT_SELENIUM_IMPLICIT_WAIT = get_config(p, SELENIUM, 'implicit_wait', 'DYSON_SELENIUM_IMPLICIT_WAIT', 0,
+                                            value_type='int')
 
 # timeout settings
 DEFAULT_TIMEOUT = get_config(p, TIMEOUTS, 'default_timeout', 'DYSON_DEFAULT_TIMEOUT', 5, value_type='int')

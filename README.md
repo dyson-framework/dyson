@@ -12,4 +12,4 @@ Dyson is a code-less Selenium framework powered by yaml/json
 > `$ pip install dyson`
 
 
----
+## [Get Started](https://github.com/dynamictivity/dyson/tree/master/docs/getting_started.md) 
