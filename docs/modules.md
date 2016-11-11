@@ -46,4 +46,4 @@ to utilize [keywords](https://github.com/dynamictivity/dyson/tree/master/docs/ke
 
 ## Creating Modules
 
-> [See Creating Modules](https://github.com/dynamictivity/dyson/tree/docs/creating_modules.md)
+> [See Creating Modules](https://github.com/dynamictivity/dyson/tree/master/docs/creating_modules.md)

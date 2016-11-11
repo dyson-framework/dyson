@@ -2,7 +2,7 @@ Variables
 ====================
 
 There are four possible ways to specify variables within your tests
-and are overrideded in this order:
+and are overriden in this order:
 
 1. `apps/default.yml`
 2. `apps/<application>.yml`
@@ -33,7 +33,7 @@ login_page:
   txt_username: "{{ login_page.txt_username }}-production"
 ```
 
-**tests/<test>/vars/main.yml**
+**tests/&lt;test&gt;/vars/main.yml**
 
 ```yaml
 ---

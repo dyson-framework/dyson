@@ -49,7 +49,7 @@ Let's look at this step by step.
 > `app_url: {{ http.protocol }}://google.com`
 
 This defines a variable that all of the tests can use. Dyson uses [Jinja](http://jinja.pocoo.org/) for variable rendering,
-so `app_url` will be whatever `http.protocol` is, plus `://google.com`
+so `app_url` will be whatever `http.protocol` is, plus `://google.com` - See [Variables](https://github.com/Dynamictivity/dyson/blob/master/docs/variables.md)
 
 The `http.protocol` is set within `dyson.cfg`, under the `[http]` section.
 
