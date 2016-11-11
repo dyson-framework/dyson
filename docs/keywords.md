@@ -59,4 +59,4 @@ Since `my_keyword` represents what was passed in from the test, we can simply do
 ## Keyword Overrides
 
 Just as modules do, keywords also override modules provided by Dyson. This means that you can create
-a keyword called `click.yml`, and it will override the core `click` module.  **Be weary of this!**
+a keyword called `click.yml`, and it will override the core `click` module.  **Be wary of this!**
