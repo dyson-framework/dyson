@@ -1,5 +1,4 @@
 import json
-from io import TextIOWrapper
 
 import yaml
 from six import string_types

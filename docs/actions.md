@@ -111,30 +111,7 @@ These "actions" are in the [core modules](https://github.com/dynamictivity/dyson
 
 #### Switch to alert
 
-> Accept an alert
-
-```yaml
-- switch_to:
-    alert:
-      action: accept # or dismiss
-```
-
-> Send keys to alert/prompt
-
-```yaml
-- switch_to:
-    alert:
-      send_keys: My Text
-```
-
-> Authenticate with alert
-
-```yaml
-- switch_to:
-    alert:
-      username: my-username
-      password: my-password
-```
+- [See alerts.md](https://github.com/dynamictivity/dyson/tree/master/docs/alerts.md#alerts) 
 
 #### Switch to window
 
