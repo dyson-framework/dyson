@@ -4,7 +4,7 @@ import importlib
 
 from dyson.errors import DysonError
 from dyson.utils.module import DysonModule
-from dyson.vars import merge_hash
+from dyson.vars import merge_dict
 
 
 def load_modules(mod_path=None):
@@ -20,10 +20,10 @@ def load_modules(mod_path=None):
 
     if mod_path is not None:
         # load specific modules from a path.
-        all_modules = merge_hash(load_modules(), _load_modules_from(mod_path))
+        all_modules = merge_dict(load_modules(), _load_modules_from(mod_path))
     else:
         for module_path in modules_paths:
-            all_modules = merge_hash(all_modules, _load_modules_from(module_path))
+            all_modules = merge_dict(all_modules, _load_modules_from(module_path))
 
     return all_modules
 

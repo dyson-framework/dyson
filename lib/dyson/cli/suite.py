@@ -4,7 +4,7 @@ from dyson.cli import CLI
 from dyson.errors import DysonError
 from dyson.suites import Suite
 from dyson.utils.dataloader import DataLoader
-from dyson.vars import VariableManager, load_extra_vars, load_aut_vars
+from dyson.vars import VariableManager, load_extra_vars, load_aut_vars, load_vars
 
 
 class SuiteCLI(CLI):
@@ -29,6 +29,8 @@ class SuiteCLI(CLI):
         variablemanager.extra_vars = load_extra_vars(loader=dataloader, options=self.options)
         variablemanager.aut_vars = load_aut_vars(loader=dataloader, options=self.options,
                                                  variable_manager=variablemanager)
+        variablemanager.vars = load_vars(loader=dataloader, options=self.options,
+                                              variable_manager=variablemanager)
 
         for suite in self.args:
             Suite(suite, data_loader=dataloader, variable_manager=variablemanager).run()

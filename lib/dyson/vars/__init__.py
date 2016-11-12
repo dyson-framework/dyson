@@ -1,4 +1,5 @@
 import ast
+import glob
 import os
 from collections import defaultdict, MutableMapping
 from json import dumps
@@ -9,35 +10,35 @@ from dyson.errors import DysonError
 from dyson.vars.parsing import parse_keyvalue
 
 
-def combine_vars(a, b):
+def combine_vars(first_dict, second_dict):
     """
     Return a copy of dictionaries of variables based on configured hash behavior
     """
 
-    return merge_hash(a, b)
+    return merge_dict(first_dict, second_dict)
 
 
-def merge_hash(a, b):
+def merge_dict(first_dict, second_dict):
     """
     Recursively merges hash b into a so that keys from b take precedence over keys from a
     """
 
-    _validate_mutable_mappings(a, b)
+    _validate_mutable_mappings(first_dict, second_dict)
 
     # if a is empty or equal to b, return b
-    if a == {} or a == b:
-        return b.copy()
+    if first_dict == {} or first_dict == second_dict:
+        return second_dict.copy()
 
     # if b is empty the below unfolds quickly
-    result = a.copy()
+    result = first_dict.copy()
 
     # next, iterate over b keys and values
-    for k, v in b.items():
+    for k, v in second_dict.items():
         # if there's already such key in a
         # and that key contains a MutableMapping
         if k in result and isinstance(result[k], MutableMapping) and isinstance(v, MutableMapping):
             # merge those dicts recursively
-            result[k] = merge_hash(result[k], v)
+            result[k] = merge_dict(result[k], v)
         else:
             # otherwise, just copy the value from b to a
             result[k] = v
@@ -70,33 +71,41 @@ def load_aut_vars(loader, options, variable_manager):
 
         if options.application != "default.yml":
             # don't load default.yml twice.
-            aut_vars = merge_hash(aut_vars, loader.load_file(
+            aut_vars = merge_dict(aut_vars, loader.load_file(
                 os.path.abspath(os.path.join(os.path.curdir, "apps", options.application)),
                 variable_manager=variable_manager))
 
     return aut_vars
 
 
-def _validate_mutable_mappings(a, b):
-    """
-    Internal convenience function to ensure arguments are MutableMappings
-    This checks that all arguments are MutableMappings or raises an error
-    :raises DysonError: if one of the arguments is not a MutableMapping
-    """
+def load_vars(loader, options, variable_manager):
+    variables = dict()
 
-    # If this becomes generally needed, change the signature to operate on
-    # a variable number of arguments instead.
+    all_var_files = (
+        glob.iglob(os.path.join(os.path.curdir, "vars", "*.yml"), recursive=True),
+        glob.iglob(os.path.join(os.path.curdir, "vars", "*.yaml"), recursive=True),
+        glob.iglob(os.path.join(os.path.curdir, "vars", "*.json"), recursive=True),
+    )
 
-    if not (isinstance(a, MutableMapping) and isinstance(b, MutableMapping)):
+    for possible_var_files in all_var_files:
+        for var_files in possible_var_files:
+            variables = merge_dict(variables,
+                                   loader.load_file(os.path.abspath(var_files), variable_manager=variable_manager))
+
+    return variables
+
+
+def _validate_mutable_mappings(first_hash, second_hash):
+    if not (isinstance(first_hash, MutableMapping) and isinstance(second_hash, MutableMapping)):
         myvars = []
-        for x in [a, b]:
+
+        for x in [first_hash, second_hash]:
             try:
                 myvars.append(dumps(x))
             except:
-                # myvars.append(to_native(x))
-                print("something went wrong")
-        raise DysonError("failed to combine variables, expected dicts but got a '{0}' and a '{1}': \n{2}\n{3}".format(
-            a.__class__.__name__, b.__class__.__name__, myvars[0], myvars[1])
+                pass
+        raise DysonError("Failed to combine dictionaries, expected dicts but got a '{0}' and '{1}': \n{2}\n{3}".format(
+            first_hash.__class__.__name__, second_hash.__class__.__name__, myvars[0], myvars[1])
         )
 
 
@@ -137,6 +146,8 @@ class VariableManager:
         self._extra_vars = defaultdict(dict)
         self._aut_vars = defaultdict(dict)
         self._test_vars = defaultdict(dict)
+        self._vars = defaultdict(dict)
+
         self._additional_vars = defaultdict(dict)
 
     def add_var(self, var):
@@ -183,6 +194,18 @@ class VariableManager:
         return self._aut_vars.copy()
 
     @property
+    def vars(self):
+        return self._vars.copy()
+
+    @vars.setter
+    def vars(self, value):
+        self._vars = value.copy()
+
+    @vars.getter
+    def vars(self):
+        return self._vars.copy()
+
+    @property
     def test_vars(self):
         return self._test_vars.copy()
 
@@ -205,12 +228,15 @@ class VariableManager:
             all_vars = self._aut_vars
 
         if self._aut_vars and self._test_vars:
-            all_vars = merge_hash(self._aut_vars, self._test_vars)
+            all_vars = merge_dict(self._aut_vars, self._test_vars)
+
+        if self._vars:
+            all_vars = merge_dict(all_vars, self._vars)
 
         if self._additional_vars:
-            all_vars = merge_hash(all_vars, self._additional_vars)
+            all_vars = merge_dict(all_vars, self._additional_vars)
 
         from dyson.constants import p
-        all_vars = merge_hash(all_vars, p._sections)
-        return merge_hash(all_vars, self._extra_vars)
+        all_vars = merge_dict(all_vars, p._sections)
+        return merge_dict(all_vars, self._extra_vars)
 

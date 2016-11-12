@@ -72,6 +72,6 @@ class DataLoader:
             for idx, item0 in enumerate(new_obj):
                 if isinstance(new_obj[idx], dict):
                     new_obj[idx] = self._iterate(new_obj[idx], variable_manager, parse_kv=parse_kv)
-                elif isidentifier(item0):
+                elif isinstance(item0, string_types):
                     new_obj[idx] = parse_jinja(new_obj[idx], variable_manager, parse_kv=parse_kv)
         return new_obj

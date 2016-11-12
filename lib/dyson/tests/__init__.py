@@ -1,3 +1,4 @@
+import glob
 import os
 
 import pathlib
@@ -10,6 +11,7 @@ from dyson.keywords import load_keywords
 from dyson.modules import load_modules
 from dyson.steps import Step
 from dyson.utils.dataloader import DataLoader
+from dyson.vars import merge_dict
 
 
 class Test:
@@ -93,37 +95,20 @@ class Test:
         """
         return str(pathlib.Path(os.path.abspath(self._test_file)).parents[1])
 
-    def _resolve_vars_file(self):
-        """
-        Resolve test specific variables nested within defaults/main.yml
-        :return:
-        """
-        # only applies when user is specifying a directory.
-        # need to poll through the test directory
-        allowed_vars = (
-            os.path.expanduser(os.path.join(self._test_path, "vars", "main.yml")),
-            os.path.expanduser(os.path.join(self._test_path, "vars", "main.yaml")),
-            os.path.expanduser(os.path.join(self._test_path, "vars", "main.json")),
-        )
-
-        number_of_vars = 0
-        for allowed_var in allowed_vars:
-            if os.path.exists(allowed_var) and os.path.isfile(allowed_var):
-                var_file = allowed_var
-                number_of_vars += 1
-
-        if number_of_vars > 1:
-            raise DysonError("There are more than one main var files in %s. Only one is allowed")
-        elif number_of_vars == 0:
-            return None
-        else:
-            return var_file
-
     def _resolve_test_vars(self):
         test_vars = dict()
-        vars_file = self._resolve_vars_file()
-        if vars_file and os.path.exists(vars_file):
-            test_vars = self._data_loader.load_file(vars_file, variable_manager=self._variable_manager)
+
+        vars_files = (
+            glob.iglob(os.path.join(self._test_path, "vars", "*.yml"), recursive=True),
+            glob.iglob(os.path.join(self._test_path, "vars", "*.yaml"), recursive=True),
+            glob.iglob(os.path.join(self._test_path, "vars", "*.json"), recursive=True),
+        )
+
+        for possible_var_files in vars_files:
+            for vars_file in possible_var_files:
+                if os.path.exists(vars_file):
+                    test_vars = merge_dict(test_vars,
+                                           self._data_loader.load_file(vars_file, variable_manager=self._variable_manager))
 
         return test_vars
 
@@ -137,7 +122,7 @@ class Test:
                     command_executor=command_executor,
                     desired_capabilities=getattr(DesiredCapabilities, browser.upper())
                 )
-                self._webdriver.implicit_wait(constants.DEFAULT_SELENIUM_IMPLICIT_WAIT)
+                self._webdriver.implicitly_wait(constants.DEFAULT_SELENIUM_IMPLICIT_WAIT)
             else:
                 self._webdriver = getattr(self._webdriver, browser)()
         else:

@@ -1,7 +1,7 @@
 import glob
 import os
 
-from dyson.vars import merge_hash
+from dyson.vars import merge_dict
 
 
 def load_keywords(keywords_path=None):
@@ -13,10 +13,10 @@ def load_keywords(keywords_path=None):
     )
 
     if keywords_path is not None:
-        all_keywords = merge_hash(load_keywords(), _load_keywords_from_path(keywords_path))
+        all_keywords = merge_dict(load_keywords(), _load_keywords_from_path(keywords_path))
     else:
         for keyword_path in keyword_paths:
-            all_keywords = merge_hash(all_keywords, _load_keywords_from_path(keyword_path))
+            all_keywords = merge_dict(all_keywords, _load_keywords_from_path(keyword_path))
 
     return all_keywords
 

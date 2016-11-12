@@ -4,7 +4,7 @@ from dyson.cli import CLI
 from dyson.errors import DysonError
 from dyson.tests import Test
 from dyson.utils.dataloader import DataLoader
-from dyson.vars import VariableManager, load_extra_vars, load_aut_vars
+from dyson.vars import VariableManager, load_extra_vars, load_aut_vars, load_vars
 
 
 class TestCLI(CLI):
@@ -29,6 +29,8 @@ class TestCLI(CLI):
         variablemanager.extra_vars = load_extra_vars(loader=dataloader, options=self.options)
         variablemanager.aut_vars = load_aut_vars(loader=dataloader, options=self.options,
                                                  variable_manager=variablemanager)
+        variablemanager.vars = load_vars(loader=dataloader, options=self.options,
+                                         variable_manager=variablemanager)
 
         for test in self.args:
             Test(test, data_loader=dataloader, variable_manager=variablemanager).run()

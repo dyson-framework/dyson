@@ -4,7 +4,7 @@
 
 - name: run all tests
   tests:
-#    - checkboxes
-#    - frames
-#    - alerts
+    - checkboxes
+    - frames
+    - alerts
     - waits

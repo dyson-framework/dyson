@@ -18,4 +18,5 @@
 - wait_for:
     visibility_of: "element={{ second.hello }}"
 
+- debug: "msg={{ test.msg }}"
 
