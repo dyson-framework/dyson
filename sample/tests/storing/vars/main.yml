@@ -1,3 +1,4 @@
 ---
 
 btn_search: css=input[name='btnK']
+lnk_privacy: css=a[href*='/privacy/']

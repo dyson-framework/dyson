@@ -3,6 +3,9 @@
 # first page
 - goto: "url={{ first.url }}"
 
+- name: sleeping for 5 seconds
+  sleep: 5
+
 - validate: "present={{ first.btn_start }}"
 - click: "{{ first.btn_start }}"
 
@@ -19,4 +22,9 @@
     visibility_of: "element={{ second.hello }}"
 
 - debug: "msg={{ test.msg }}"
+
+
+
+- name: sleeping for 2500 milliseconds
+  sleep: ms=2500
 

@@ -1,0 +1,21 @@
+---
+
+# First Google
+- goto: url=https://google.com
+- validate: title=Google
+
+# Now The Intenet
+- navigate: to=https://the-internet.herokuapp.com
+
+- validate:
+    title: The Internet
+
+# Back to Google
+- navigate: back
+- validate: Title=Google
+
+# Forward to The Internet
+- navigate: forward
+
+- validate:
+    title: The Internet

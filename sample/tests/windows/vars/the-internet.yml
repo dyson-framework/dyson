@@ -1,0 +1,5 @@
+---
+
+the_internet:
+  url: https://the-internet.herokuapp.com/windows
+  lnk_clickhere: css=a[href='/windows/new']

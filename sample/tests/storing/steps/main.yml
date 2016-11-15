@@ -8,3 +8,8 @@
   store: the_text
 
 - validate: "'{{ the_text }}' is 'Google Search'"
+
+- get_text: "of={{ lnk_privacy }}"
+  store: privacy
+
+- debug: "var={{ privacy }}"

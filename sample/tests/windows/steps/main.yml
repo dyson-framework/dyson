@@ -1,0 +1,17 @@
+---
+
+- goto: "url={{ the_internet.url }}"
+
+- click: "{{ the_internet.lnk_clickhere }}"
+
+- get_window_handles:
+  store: window_handles
+
+- switch_to:
+    window: "{{ window_handles[1] }}"
+
+- validate:
+    text_of:
+      element: tag=h3
+      is: New Window
+
