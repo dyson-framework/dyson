@@ -1,0 +1,12 @@
+---
+
+- goto: url=https://google.com
+
+- add_cookies:
+    - name: my_cookie
+      value: test
+
+- get_cookies: name=my_cookie
+  store: my_cookie
+
+- validate: "'{{ my_cookie['value'] }}' is 'test'"
