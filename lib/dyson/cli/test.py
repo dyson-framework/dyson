@@ -33,6 +33,8 @@ class TestCLI(CLI):
                                          variable_manager=variablemanager)
 
         for test in self.args:
-            Test(test, data_loader=dataloader, variable_manager=variablemanager).run()
+            self.report.add_test(Test(test, data_loader=dataloader, variable_manager=variablemanager).run())
+            self.report.render()
+
 
 

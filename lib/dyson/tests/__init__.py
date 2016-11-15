@@ -1,6 +1,5 @@
 import glob
 import os
-
 import pathlib
 
 from selenium import webdriver
@@ -12,6 +11,7 @@ from dyson.modules import load_modules
 from dyson.steps import Step
 from dyson.utils.dataloader import DataLoader
 from dyson.vars import merge_dict
+from dyson.vars.parsing import iterate_dict
 
 
 class Test:
@@ -20,6 +20,8 @@ class Test:
         self._data_loader = data_loader
         self._variable_manager = variable_manager
         self._webdriver = webdriver
+        self._steps = list()
+
         if os.path.isdir(os.path.expanduser(test_file)):
             self._test_file = self._resolve_main()
 
@@ -31,7 +33,7 @@ class Test:
 
     def run(self):
         # first let's get the steps
-        all_steps = self._data_loader.load_file(self._test_file, self._variable_manager)
+        all_steps = self._data_loader.load_file(self._test_file)
 
         # iterate through all includes
         all_steps = self._resolve_all_includes(all_steps)
@@ -40,11 +42,30 @@ class Test:
 
         try:
             for step in all_steps:
-                    # run each step
-                    Step(step, data_loader=self._data_loader, variable_manager=self._variable_manager, modules=self._modules,
+                # run each step
+
+                step = iterate_dict(step, variable_manager=self._variable_manager)
+
+                if 'store' in step:
+                    var_name = step['store']
+                    del step['store']
+
+                    _, _, retval = Step(step,
+                                        data_loader=self._data_loader,
+                                        variable_manager=self._variable_manager,
+                                        modules=self._modules,
+                                        webdriver=self._webdriver, keywords=self._keywords).run()
+                    self._variable_manager.add_var({var_name: retval})
+                else:
+                    Step(step,
+                         data_loader=self._data_loader,
+                         variable_manager=self._variable_manager,
+                         modules=self._modules,
                          webdriver=self._webdriver, keywords=self._keywords).run()
         finally:
             self._webdriver.quit()
+
+        return os.path.basename(self._test_file), all_steps
 
     def _resolve_main(self):
         # only applies when user is specifying a directory.
@@ -70,7 +91,7 @@ class Test:
 
     def _resolve_include(self, included_file, data_loader: DataLoader):
         file_to_include = os.path.expanduser(os.path.join(self._test_path, "steps", "%s" % included_file))
-        new_step = data_loader.load_file(file_to_include, variable_manager=self._variable_manager)
+        new_step = data_loader.load_file(file_to_include)
         return new_step
 
     def _resolve_all_includes(self, all_steps):
@@ -99,7 +120,7 @@ class Test:
         test_vars = dict()
 
         vars_files = (
-            glob.iglob(os.path.join(self._test_path, "vars", "*.yml"), recursive=True),
+            glob.iglob(os.path.join(self._test_path, "vars", "*.yml"),  recursive=True),
             glob.iglob(os.path.join(self._test_path, "vars", "*.yaml"), recursive=True),
             glob.iglob(os.path.join(self._test_path, "vars", "*.json"), recursive=True),
         )
@@ -108,9 +129,9 @@ class Test:
             for vars_file in possible_var_files:
                 if os.path.exists(vars_file):
                     test_vars = merge_dict(test_vars,
-                                           self._data_loader.load_file(vars_file, variable_manager=self._variable_manager))
+                                           self._data_loader.load_file(vars_file))
 
-        return test_vars
+        return iterate_dict(test_vars, variable_manager=self._variable_manager, parse_kv=False)
 
     def _start_selenium(self):
         from dyson import constants

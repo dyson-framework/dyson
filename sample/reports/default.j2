@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title>{{ test_name }}</title>
+</head>
+<body>
+    I am a report bro!
+
+    <ul id="steps">
+    {% for step in steps %}
+        <li>{{ step }} {{ steps[step] }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

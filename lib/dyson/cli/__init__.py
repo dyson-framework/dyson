@@ -1,12 +1,15 @@
 from abc import abstractmethod
 from optparse import OptionParser
 
+from dyson.reporting import Report
+
 
 class CLI:
     def __init__(self, args):
         self.args = args
         self.options = None
         self.parser = None
+        self._report = Report()
 
     @staticmethod
     def base_parser(usage="", datafile_opts=False):
@@ -38,3 +41,16 @@ class CLI:
     @abstractmethod
     def run(self):
         pass
+
+    @property
+    def report(self):
+        return self._report
+
+    @report.setter
+    def report(self, report):
+        self._report = report
+
+    @report.getter
+    def report(self):
+        return self._report
+

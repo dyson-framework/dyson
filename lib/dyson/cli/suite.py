@@ -30,7 +30,7 @@ class SuiteCLI(CLI):
         variablemanager.aut_vars = load_aut_vars(loader=dataloader, options=self.options,
                                                  variable_manager=variablemanager)
         variablemanager.vars = load_vars(loader=dataloader, options=self.options,
-                                              variable_manager=variablemanager)
+                                         variable_manager=variablemanager)
 
         for suite in self.args:
-            Suite(suite, data_loader=dataloader, variable_manager=variablemanager).run()
+            Suite(suite, data_loader=dataloader, variable_manager=variablemanager, report=self.report).run()

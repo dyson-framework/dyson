@@ -1,10 +1,12 @@
 from dyson.errors import DysonError
 from dyson.utils.dataloader import DataLoader
 from dyson.vars import VariableManager
+from dyson.vars import iterate_dict
 
 
 class Step:
-    def __init__(self, step: dict, data_loader: DataLoader, variable_manager: VariableManager, keywords: dict, modules: dict,
+    def __init__(self, step: dict, data_loader: DataLoader, variable_manager: VariableManager, keywords: dict,
+                 modules: dict,
                  webdriver):
 
         self._step = step
@@ -26,11 +28,11 @@ class Step:
             """
             # for the keyword, get the steps within, and execute it.
             self._variable_manager.add_var(self._step)  # add ephemeral variables
-            individual_steps = self._data_loader.load_file(
-                self._keywords[step_module], variable_manager=self._variable_manager)
+            individual_steps = self._data_loader.load_file(self._keywords[step_module])
 
             if isinstance(individual_steps, list):
                 for individual_step in individual_steps:
+                    individual_step = iterate_dict(individual_step, variable_manager=self._variable_manager)
                     Step(individual_step,
                          data_loader=self._data_loader,
                          variable_manager=self._variable_manager,
@@ -42,7 +44,10 @@ class Step:
 
             self._variable_manager.clear_additional_vars()
         elif step_module in self._modules:
-            self._modules[step_module]().run(webdriver=self._webdriver, params=self._step[step_module])
+            """
+            Run the specified Module
+            """
+            return step_module, self._step[step_module], \
+                   self._modules[step_module]().run(webdriver=self._webdriver, params=self._step[step_module])
         else:
             raise DysonError("No such module or keyword \"%s\" exists" % step_module)
-

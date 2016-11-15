@@ -7,7 +7,7 @@ from json import dumps
 from six import string_types
 
 from dyson.errors import DysonError
-from dyson.vars.parsing import parse_keyvalue
+from dyson.vars.parsing import parse_keyvalue, iterate_dict
 
 
 def combine_vars(first_dict, second_dict):
@@ -66,16 +66,14 @@ def load_aut_vars(loader, options, variable_manager):
     aut_vars = dict()
     if options and options.application:
         # first, load in default.yml, then override with $application.yml
-        aut_vars = loader.load_file(os.path.abspath(os.path.join(os.path.curdir, "apps", "default.yml")),
-                                    variable_manager=variable_manager)
+        aut_vars = loader.load_file(os.path.abspath(os.path.join(os.path.curdir, "apps", "default.yml")))
 
         if options.application != "default.yml":
             # don't load default.yml twice.
             aut_vars = merge_dict(aut_vars, loader.load_file(
-                os.path.abspath(os.path.join(os.path.curdir, "apps", options.application)),
-                variable_manager=variable_manager))
+                os.path.abspath(os.path.join(os.path.curdir, "apps", options.application))))
 
-    return aut_vars
+    return iterate_dict(aut_vars, variable_manager=variable_manager, parse_kv=False)
 
 
 def load_vars(loader, options, variable_manager):
@@ -90,9 +88,10 @@ def load_vars(loader, options, variable_manager):
     for possible_var_files in all_var_files:
         for var_files in possible_var_files:
             variables = merge_dict(variables,
-                                   loader.load_file(os.path.abspath(var_files), variable_manager=variable_manager))
+                                   loader.load_file(os.path.abspath(var_files)))
 
-    return variables
+    # don't parsekv for variables
+    return iterate_dict(variables, variable_manager=variable_manager, parse_kv=False)
 
 
 def _validate_mutable_mappings(first_hash, second_hash):
