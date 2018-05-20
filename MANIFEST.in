@@ -1,0 +1,10 @@
+prune sample
+prune hacking
+include README.md
+include MANIFEST.in
+recursive-include lib/dyson/modules *
+recursive-include docs *
+exclude lib/dyson/modules/core/.git*
+exclude lib/dyson/modules/extras/.git*
+prune lib/dyson/modules/core/.git
+prune lib/dyson/modules/extras/.git

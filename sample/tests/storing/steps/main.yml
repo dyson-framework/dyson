@@ -3,9 +3,9 @@
 - goto: url=https://google.com
 
 - get_attribute:
-    of: "{{ btn_search }}"
-    attribute: value
-  store: the_text
+                     of: "{{ btn_search }}"
+                     attribute: value
+                   store: the_text
 
 - validate: "'{{ the_text }}' is 'Google Search'"
 

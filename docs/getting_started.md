@@ -16,7 +16,7 @@ first-dyson-project/
         main.yml
 ```
 
-- Put the [source from the sample](https://github.com/dynamictivity/dyson/tree/master/sample/dyson.cfg) inside of `dyson.cfg`
+- Put the [source from the sample](https://github.com/ddavison/dyson/tree/master/sample/dyson.cfg) inside of `dyson.cfg`
 
 - Inside of `apps/default.yml`:
 
@@ -49,7 +49,7 @@ Let's look at this step by step.
 > `app_url: {{ http.protocol }}://google.com`
 
 This defines a variable that all of the tests can use. Dyson uses [Jinja](http://jinja.pocoo.org/) for variable rendering,
-so `app_url` will be whatever `http.protocol` is, plus `://google.com` - See [Variables](https://github.com/Dynamictivity/dyson/blob/master/docs/variables.md)
+so `app_url` will be whatever `http.protocol` is, plus `://google.com` - See [Variables](https://github.com/ddavison/dyson/blob/master/docs/variables.md)
 
 The `http.protocol` is set within `dyson.cfg`, under the `[http]` section.
 

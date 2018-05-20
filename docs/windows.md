@@ -1,7 +1,7 @@
 Dealing with Windows
 ====================
 
-In the [Core Modules](https://github.com/dynamictivity/dyson-modules-core),
+In the [Core Modules](https://github.com/ddavison/dyson-modules-core),
 there exist a couple modules for you to deal with windows and 
 switching between them.
 
@@ -17,7 +17,7 @@ switching between them.
     window: "{{ window_handles[1] }}"
 ```
 
-A couple notes.  First, we are [storing a variable](https://github.com/dynamictivity/dyson/tree/master/docs/storing_variables.md)
+A couple notes.  First, we are [storing a variable](https://github.com/ddavison/dyson/tree/master/docs/storing_variables.md)
 to the value of all window handles.  Since this module in specific
 returns the python object of `driver.window_handles`,
 we are able to operate upon it just as you would in python.

@@ -11,7 +11,7 @@ from dyson.modules import load_modules
 from dyson.steps import Step
 from dyson.utils.dataloader import DataLoader
 from dyson.vars import merge_dict
-from dyson.vars.parsing import iterate_dict
+from dyson.vars.parsing import iterate_dict, parse_jinja
 
 
 class Test:
@@ -50,22 +50,32 @@ class Test:
                     var_name = step['store']
                     del step['store']
 
-                    _, _, retval = Step(step,
-                                        data_loader=self._data_loader,
-                                        variable_manager=self._variable_manager,
-                                        modules=self._modules,
-                                        webdriver=self._webdriver, keywords=self._keywords).run()
-                    self._variable_manager.add_var({var_name: retval})
+                    if 'when' in step:
+                        result = parse_jinja(step['when'], variable_manager=self._variable_manager)
+                        if result:
+                            _, _, retval = self._run_step(step)
+                            self._variable_manager.add_var({var_name: retval})
+                    else:
+                        _, _, retval = self._run_step(step)
+                        self._variable_manager.add_var({var_name: retval})
                 else:
-                    Step(step,
-                         data_loader=self._data_loader,
-                         variable_manager=self._variable_manager,
-                         modules=self._modules,
-                         webdriver=self._webdriver, keywords=self._keywords).run()
+                    if 'when' in step:
+                        result = parse_jinja(step['when'], variable_manager=self._variable_manager)
+                        if result:
+                            self._run_step(step)
+                    else:
+                        self._run_step(step)
         finally:
             self._webdriver.quit()
 
         return os.path.basename(self._test_file), all_steps
+
+    def _run_step(self, step):
+        return Step(step,
+                    data_loader=self._data_loader,
+                    variable_manager=self._variable_manager,
+                    modules=self._modules,
+                    webdriver=self._webdriver, keywords=self._keywords).run()
 
     def _resolve_main(self):
         # only applies when user is specifying a directory.

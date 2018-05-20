@@ -191,3 +191,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+Vagrantfile
+.vagrant

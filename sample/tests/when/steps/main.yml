@@ -1,0 +1,4 @@
+---
+
+- goto: url=https://google.com
+  when: "{% http.protocol is defined %}"

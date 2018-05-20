@@ -2,7 +2,7 @@ Keywords
 ========
 
 Keywords are a set of steps to execute in your tests and can be called just
-like a [module](https://github.com/dynamictivity/dyson/tree/master/docs/modules.md) is called.
+like a [module](https://github.com/ddavison/dyson/tree/master/docs/modules.md) is called.
 
 There are two locations that keywords may reside.
 
