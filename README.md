@@ -13,24 +13,24 @@ Dyson is a code-less Selenium framework powered by yaml/json
 
 ## Get Started
 
-- [See Getting Started](https://github.com/ddavison/dyson/blob/master/docs/getting_started.md#getting-started-with-dyson)
+- [See Getting Started](https://github.com/dyson-framework/dyson/blob/master/docs/getting_started.md#getting-started-with-dyson)
 
 ## Documentation
 
-- [Actions](https://github.com/ddavison/dyson/blob/master/docs/actions.md#actions)
-- [Validations](https://github.com/ddavison/dyson/blob/master/docs/validations.md#validations)
-- [Variables](https://github.com/ddavison/dyson/blob/master/docs/variables.md#variables)
-- [Waiting](https://github.com/ddavison/dyson/blob/master/docs/waiting.md#waiting)
-- [Modules](https://github.com/ddavison/dyson/blob/master/docs/modules.md#modules)
-- [Keywords](https://github.com/ddavison/dyson/blob/master/docs/keywords.md#keywords)
-- [Applications](https://github.com/ddavison/dyson/blob/master/docs/applications.md#applications)
-- [Configuration](https://github.com/ddavison/dyson/blob/master/docs/configuration.md#dyson-configuration)
-- [Alerts](https://github.com/ddavison/dyson/blob/master/docs/alerts.md#alerts)
+- [Actions](https://github.com/dyson-framework/dyson/blob/master/docs/actions.md#actions)
+- [Validations](https://github.com/dyson-framework/dyson/blob/master/docs/validations.md#validations)
+- [Variables](https://github.com/dyson-framework/dyson/blob/master/docs/variables.md#variables)
+- [Waiting](https://github.com/dyson-framework/dyson/blob/master/docs/waiting.md#waiting)
+- [Modules](https://github.com/dyson-framework/dyson/blob/master/docs/modules.md#modules)
+- [Keywords](https://github.com/dyson-framework/dyson/blob/master/docs/keywords.md#keywords)
+- [Applications](https://github.com/dyson-framework/dyson/blob/master/docs/applications.md#applications)
+- [Configuration](https://github.com/dyson-framework/dyson/blob/master/docs/configuration.md#dyson-configuration)
+- [Alerts](https://github.com/dyson-framework/dyson/blob/master/docs/alerts.md#alerts)
 
-[See all Documentation](https://github.com/ddavison/dyson/tree/master/docs)
+[See all Documentation](https://github.com/dyson-framework/dyson/tree/master/docs)
 
 ## Working Examples
 
-See the [samples](https://github.com/ddavison/dyson/tree/master/sample) to see
+See the [samples](https://github.com/dyson-framework/dyson/tree/master/sample) to see
 a fully functional project.  This project is exactly how your projects would be lain out.
 

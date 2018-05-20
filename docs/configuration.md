@@ -45,7 +45,7 @@ All timeout related variables
 
 ### Default Timeout
 
-With every [`wait_for`](https://github.com/ddavison/dyson/tree/master/docs/waiting.md),
+With every [`wait_for`](https://github.com/dyson-framework/dyson/tree/master/docs/waiting.md),
 Dyson will read this value and pass it into the `wait_for` steps by default.
 
 Timeouts are in **seconds**
@@ -80,4 +80,4 @@ This defaults to **true**, but can be set to `no`,`false`, `0`
 
 Dyson requires that a `dyson.cfg` file exists in your project root.
 
-You can see an example in Dyson's [Sample dyson.cfg file](https://github.com/ddavison/dyson/tree/master/sample/dyson.cfg)
+You can see an example in Dyson's [Sample dyson.cfg file](https://github.com/dyson-framework/dyson/tree/master/sample/dyson.cfg)

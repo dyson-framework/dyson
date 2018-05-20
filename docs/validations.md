@@ -1,7 +1,7 @@
 Validations
 ===========
 
-There are many validations bundled in the [core modules](https://github.com/ddavison/dyson-modules-core)
+There are many validations bundled in the [core modules](https://github.com/dyson-framework/dyson-modules-core)
 which will perform validations.
 
 The validation module has many variations of validations it can perform.

@@ -1,7 +1,7 @@
 Cookies
 =======
 
-In the [Extra Modules](https://github.com/ddavison/dyson-modules-extras)
+In the [Extra Modules](https://github.com/dyson-framework/dyson-modules-extras)
 repository, there exist some modules for you to deal with cookies.
 
 ## Add Cookies

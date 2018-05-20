@@ -2,7 +2,7 @@ Actions
 =======
 
 There are multiple actions that can be taken on the application.
-These "actions" are in the [core modules](https://github.com/ddavison/dyson-modules-core).
+These "actions" are in the [core modules](https://github.com/dyson-framework/dyson-modules-core).
 
 - [Goto URL](#goto-url)
 - [Click](#click)
@@ -111,7 +111,7 @@ These "actions" are in the [core modules](https://github.com/ddavison/dyson-modu
 
 #### Switch to alert
 
-- [See alerts.md](https://github.com/ddavison/dyson/tree/master/docs/alerts.md#alerts)
+- [See alerts.md](https://github.com/dyson-framework/dyson/tree/master/docs/alerts.md#alerts)
 
 #### Switch to window
 
