@@ -33,6 +33,8 @@ def translate_selector(selector, webdriver):
         return getattr(webdriver, 'find_element_by_class_name'), selector['class']
     elif 'css' in selector:
         return getattr(webdriver, 'find_element_by_css_selector'), selector['css']
+    else:
+        return getattr(webdriver, 'find_element_by_css_selector'), selector
 
     return None, None
 
