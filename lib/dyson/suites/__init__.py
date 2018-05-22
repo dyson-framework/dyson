@@ -13,11 +13,12 @@ class Suite:
     def run(self):
         suite = self._data_loader.load_file(os.path.abspath(self._suite_file))
 
+        from dyson import constants
         for obj in suite:
             if 'tests' in obj:
                 for test in obj['tests']:
                     self._report.add_test(
-                        Test(os.path.join("tests", test),
+                        Test(os.path.join(constants.BASE_DIR, "tests", test),
                              data_loader=self._data_loader,
                              variable_manager=self._variable_manager).run()
                     )

@@ -106,9 +106,10 @@ def init(opts):
     global DEFAULT_HTTP_USER_AGENT, DEFAULT_SELENIUM_HUB
     global DEFAULT_SELENIUM_BROWSER, DEFAULT_SELENIUM_PERSIST
     global DEFAULT_SELENIUM_IMPLICIT_WAIT, DEFAULT_TIMEOUT
+    global BASE_DIR
 
-    basedir = opts["basedir"] or os.getcwd()
-    p, CONFIG_FILE = load_config_file(basedir)
+    BASE_DIR = opts["basedir"] or os.getcwd()
+    p, CONFIG_FILE = load_config_file(BASE_DIR)
 
     DEFAULTS = 'defaults'
     HTTP = 'http'

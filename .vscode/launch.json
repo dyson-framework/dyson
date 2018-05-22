@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Dyson",
+      "name": "Launch Dyson Test",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/lib/dyson.py",
@@ -14,6 +14,18 @@
         "--base-dir",
         "${workspaceFolder}\\sample",
         "${workspaceFolder}\\sample\\tests\\frames"
+      ]
+    },
+    {
+      "name": "Launch Dyson Suite",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/lib/dyson.py",
+      "args": [
+        "suite",
+        "--base-dir",
+        "${workspaceFolder}\\sample",
+        "${workspaceFolder}\\sample\\suite.yml"
       ]
     },
     {

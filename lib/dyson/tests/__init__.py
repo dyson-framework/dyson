@@ -124,7 +124,8 @@ class Test:
         need to up two directories.
         :return:
         """
-        return str(pathlib.Path(os.path.abspath(self._test_file)).parents[1])
+        from dyson import constants
+        return str(pathlib.Path(os.path.abspath(os.path.join(constants.BASE_DIR, self._test_file))).parents[1])
 
     def _resolve_test_vars(self):
         test_vars = dict()
