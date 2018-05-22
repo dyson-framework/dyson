@@ -158,4 +158,3 @@ class Test:
                 self._webdriver = getattr(self._webdriver, browser)()
         else:
             raise DysonError("Invalid browser " % constants.DEFAULT_SELENIUM_BROWSER)
-

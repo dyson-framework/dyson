@@ -22,5 +22,3 @@ if __name__ == "__main__":
     cli.parse()
     rc = cli.run()
     exit(rc)
-
-

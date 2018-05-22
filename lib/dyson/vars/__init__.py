@@ -66,12 +66,12 @@ def load_aut_vars(loader, options, variable_manager):
     aut_vars = dict()
     if options and options.application:
         # first, load in default.yml, then override with $application.yml
-        aut_vars = loader.load_file(os.path.abspath(os.path.join(os.path.curdir, "apps", "default.yml")))
+        aut_vars = loader.load_file(os.path.abspath(os.path.join(options.base_dir, "apps", "default.yml")))
 
         if options.application != "default.yml":
             # don't load default.yml twice.
             aut_vars = merge_dict(aut_vars, loader.load_file(
-                os.path.abspath(os.path.join(os.path.curdir, "apps", options.application))))
+                os.path.abspath(os.path.join(options.base_dir, "apps", options.application))))
 
     return iterate_dict(aut_vars, variable_manager=variable_manager, parse_kv=False)
 
@@ -80,9 +80,9 @@ def load_vars(loader, options, variable_manager):
     variables = dict()
 
     all_var_files = (
-        glob.iglob(os.path.join(os.path.curdir, "vars", "*.yml"), recursive=True),
-        glob.iglob(os.path.join(os.path.curdir, "vars", "*.yaml"), recursive=True),
-        glob.iglob(os.path.join(os.path.curdir, "vars", "*.json"), recursive=True),
+        glob.iglob(os.path.join(options.base_dir, "vars", "*.yml"), recursive=True),
+        glob.iglob(os.path.join(options.base_dir, "vars", "*.yaml"), recursive=True),
+        glob.iglob(os.path.join(options.base_dir, "vars", "*.json"), recursive=True),
     )
 
     for possible_var_files in all_var_files:
