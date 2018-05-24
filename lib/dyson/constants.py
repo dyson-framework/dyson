@@ -21,7 +21,7 @@ def shell_expand(path, expand_relative_paths=False):
     return path
 
 
-def load_config_file(basedir):
+def load_config_file():
     """ Load Config File order (first found is used).  environment variable, working dir, HOME """
 
     p = configparser.ConfigParser()
@@ -32,7 +32,7 @@ def load_config_file(basedir):
         if os.path.isdir(path0):
             path0 += "/dyson.cfg"
     try:
-        path1 = os.path.join(basedir, "dyson.cfg")
+        path1 = os.path.join(BASE_DIR, "dyson.cfg")
     except OSError:
         path1 = None
     path2 = os.path.expanduser("~/.dyson.cfg")
@@ -109,7 +109,7 @@ def init(opts):
     global BASE_DIR
 
     BASE_DIR = opts["basedir"] or os.getcwd()
-    p, CONFIG_FILE = load_config_file(BASE_DIR)
+    p, CONFIG_FILE = load_config_file()
 
     DEFAULTS = 'defaults'
     HTTP = 'http'
