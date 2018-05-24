@@ -14,6 +14,7 @@ class TestCLI(CLI):
             datafile_opts=True
         )
         self.parser.add_option('-b', '--browser', help="Specify which browser to run. e.g. chrome, firefox")
+        self.parser.add_option('-d', '--base-dir', help="Sets the base directory to run the app")
         super(TestCLI, self).parse()
 
     def run(self):
@@ -23,7 +24,11 @@ class TestCLI(CLI):
             if not os.path.exists(test):
                 raise DysonError("Test file %s does not exist" % test)
 
-        dataloader = DataLoader()
+        dataloader = DataLoader({"basedir": self.options.base_dir})
+
+        # initialize constants using base_dir
+        from dyson import constants
+        constants.init({"basedir": self.options.base_dir})
 
         variablemanager = VariableManager()
         variablemanager.extra_vars = load_extra_vars(loader=dataloader, options=self.options)

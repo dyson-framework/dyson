@@ -7,8 +7,8 @@ from dyson.vars.parsing import parse_jinja
 
 
 class DataLoader:
-    def __init__(self):
-        self._basedir = '.'
+    def __init__(self, opts):
+        self._basedir = opts["basedir"] or '.'
 
     def load(self, data):
         """

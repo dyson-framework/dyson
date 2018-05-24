@@ -32,7 +32,7 @@ def load_config_file():
         if os.path.isdir(path0):
             path0 += "/dyson.cfg"
     try:
-        path1 = os.getcwd() + "/dyson.cfg"
+        path1 = os.path.join(BASE_DIR, "dyson.cfg")
     except OSError:
         path1 = None
     path2 = os.path.expanduser("~/.dyson.cfg")
@@ -101,27 +101,34 @@ def _get_config(p, section, key, env_var, default):
             return default
     return default
 
+def init(opts):
+    global p, CONFIG_FILE, DEFAULT_DEBUG, DEFAULT_HTTP_PROTOCOL
+    global DEFAULT_HTTP_USER_AGENT, DEFAULT_SELENIUM_HUB
+    global DEFAULT_SELENIUM_BROWSER, DEFAULT_SELENIUM_PERSIST
+    global DEFAULT_SELENIUM_IMPLICIT_WAIT, DEFAULT_TIMEOUT
+    global BASE_DIR
 
-p, CONFIG_FILE = load_config_file()
+    BASE_DIR = opts["basedir"] or os.getcwd()
+    p, CONFIG_FILE = load_config_file()
 
-DEFAULTS = 'defaults'
-HTTP = 'http'
-TIMEOUTS = 'timeouts'
-SELENIUM = 'selenium'
+    DEFAULTS = 'defaults'
+    HTTP = 'http'
+    TIMEOUTS = 'timeouts'
+    SELENIUM = 'selenium'
 
-DEFAULT_DEBUG = get_config(p, DEFAULTS, 'debug', 'DYSON_DEBUG', False, value_type='boolean')
+    DEFAULT_DEBUG = get_config(p, DEFAULTS, 'debug', 'DYSON_DEBUG', False, value_type='boolean')
 
-# http settings
-DEFAULT_HTTP_PROTOCOL = get_config(p, HTTP, 'protocol', 'DYSON_HTTP_PROTOCOL', 'http', value_type='string')
-DEFAULT_HTTP_USER_AGENT = get_config(p, HTTP, 'user_agent', 'DYSON_HTTP_USER_AGENT', None, value_type='string')
+    # http settings
+    DEFAULT_HTTP_PROTOCOL = get_config(p, HTTP, 'protocol', 'DYSON_HTTP_PROTOCOL', 'http', value_type='string')
+    DEFAULT_HTTP_USER_AGENT = get_config(p, HTTP, 'user_agent', 'DYSON_HTTP_USER_AGENT', None, value_type='string')
 
-# selenium settings
-DEFAULT_SELENIUM_HUB = get_config(p, SELENIUM, 'hub', 'DYSON_SELENIUM_HUB', 'http://127.0.0.1:4444/wd/hub',
-                                  value_type='string')
-DEFAULT_SELENIUM_BROWSER = get_config(p, SELENIUM, 'browser', 'DYSON_SELENIUM_BROWSER', None, value_type='string')
-DEFAULT_SELENIUM_PERSIST = get_config(p, SELENIUM, 'persist', 'DYSON_SELENIUM_PERSIST', True, value_type='boolean')
-DEFAULT_SELENIUM_IMPLICIT_WAIT = get_config(p, SELENIUM, 'implicit_wait', 'DYSON_SELENIUM_IMPLICIT_WAIT', 0,
-                                            value_type='int')
+    # selenium settings
+    DEFAULT_SELENIUM_HUB = get_config(p, SELENIUM, 'hub', 'DYSON_SELENIUM_HUB', 'http://127.0.0.1:4444/wd/hub',
+                                    value_type='string')
+    DEFAULT_SELENIUM_BROWSER = get_config(p, SELENIUM, 'browser', 'DYSON_SELENIUM_BROWSER', None, value_type='string')
+    DEFAULT_SELENIUM_PERSIST = get_config(p, SELENIUM, 'persist', 'DYSON_SELENIUM_PERSIST', True, value_type='boolean')
+    DEFAULT_SELENIUM_IMPLICIT_WAIT = get_config(p, SELENIUM, 'implicit_wait', 'DYSON_SELENIUM_IMPLICIT_WAIT', 0,
+                                                value_type='int')
 
-# timeout settings
-DEFAULT_TIMEOUT = get_config(p, TIMEOUTS, 'default_timeout', 'DYSON_DEFAULT_TIMEOUT', 5, value_type='int')
+    # timeout settings
+    DEFAULT_TIMEOUT = get_config(p, TIMEOUTS, 'default_timeout', 'DYSON_DEFAULT_TIMEOUT', 5, value_type='int')
